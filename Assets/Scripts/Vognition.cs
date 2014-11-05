@@ -8,7 +8,20 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 //using Newtonsoft.Json;
 //using Newtonsoft.Json.Linq;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 
+public class TrustAllCertificatePolicy : System.Net.ICertificatePolicy
+{
+	public TrustAllCertificatePolicy() {}
+	public bool CheckValidationResult(ServicePoint sp, 
+	                                  X509Certificate cert,
+	                                  WebRequest req, 
+	                                  int problem)
+	{
+		return true;
+	}
+}
 public class Vognition : MonoBehaviour
 {
 	string baseURL = "http://sample.whataremindsfor.com:46900/";
@@ -16,8 +29,8 @@ public class Vognition : MonoBehaviour
 
 	public void Start()
 	{
-		//filePath = Application.dataPath + "/myfile.wav";
-		filePath = @"C:\Users\Jose\Desktop\myfile";
+		filePath = Application.dataPath + "/myfile.wav";
+		//filePath = @"C:\Users\Richard\Desktop\lights.wav";
 	}
 
 	public void Both(){
@@ -28,9 +41,13 @@ public class Vognition : MonoBehaviour
 	{
 		string response = vogRecognize(filePath);
 		Debug.Log(response);
-	}
 
-    public void TransText()
+		if (response == "Turn off the light") {
+			this.light.enabled = false;
+		}
+	}
+	
+	public void TransText()
     {
         string response = vogTransText("Turn off the lights");
         Debug.Log(response);
@@ -120,18 +137,21 @@ public class Vognition : MonoBehaviour
 		string id = "0000";
 		string nuanceURL = "https://dictation.nuancemobility.net:443/NMDPAsrCmdServlet/dictation?appId=" + appId + "&appKey=" + appKey + "&id=" + id;
 		string translatedMessage = "null";
-		try
-		{
+		//try
+		//{
+			System.Net.ServicePointManager.CertificatePolicy = new TrustAllCertificatePolicy();
 			HttpWebRequest nuanceRequest = (HttpWebRequest)WebRequest.Create(nuanceURL);           
 			nuanceRequest.ProtocolVersion = HttpVersion.Version11;
 			nuanceRequest.ContentType = "audio/x-wav;codec=pcm;bit=16;rate=16000";
 			nuanceRequest.Accept = "text/plain";
 			nuanceRequest.Method = WebRequestMethods.Http.Post;
+			nuanceRequest.AuthenticationLevel = AuthenticationLevel.None;
 			nuanceRequest.Credentials = System.Net.CredentialCache.DefaultCredentials;
 			
 			nuanceRequest.Headers["Accept-Language"] = "enus";
 			nuanceRequest.Headers["Accept-Topic"] = "Dictation";
 			nuanceRequest.Headers["X-Dictation-NBestListSize"] = "1";
+			
 			
 			// Store the post data into the MemoryStream
 			MemoryStream postDataStream = new MemoryStream();
@@ -161,14 +181,13 @@ public class Vognition : MonoBehaviour
 			// Get the response from the server
 			StreamReader responseReader = new StreamReader(nuanceRequest.GetResponse().GetResponseStream());
 			translatedMessage = responseReader.ReadToEnd();
-		}
-		catch (WebException e)
+		//}
+		/*catch (WebException e)
 		{
-
 			// Thrown if a 200 is not returned
-			//print("Response code: " + (int)((HttpWebResponse)e.Response).StatusCode +
-			//                  "\t" + ((HttpWebResponse)e.Response).StatusDescription);
-			//throw new WebException();
+			print("Response code: " + (int)((HttpWebResponse)e.Response).StatusCode +
+			                  "\t" + ((HttpWebResponse)e.Response).StatusDescription);
+			throw new WebException();
 
 			Debug.Log(e.StackTrace);
 		}
@@ -176,7 +195,7 @@ public class Vognition : MonoBehaviour
 		{
 			Console.WriteLine(file.Message);
 			throw new FileNotFoundException();
-		}
+		}*/
 		return translatedMessage;
 	}
 }
