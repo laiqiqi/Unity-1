@@ -5,37 +5,68 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 //using Newtonsoft.Json;
 //using Newtonsoft.Json.Linq;
+
+public class TrustAllCertificatePolicy : System.Net.ICertificatePolicy
+{
+	public TrustAllCertificatePolicy() {}
+	public bool CheckValidationResult(ServicePoint sp, 
+	                                  X509Certificate cert,
+	                                  WebRequest req, 
+	                                  int problem)
+	{
+		return true;
+	}
+}
 
 public class Vognition : MonoBehaviour
 {
 	string baseURL = "http://sample.whataremindsfor.com:46900/";
 	string filePath;
+	AudioSource aud;
 
 	public void Start()
 	{
-		//filePath = Application.dataPath + "/myfile.wav";
-		filePath = @"C:\Users\Jose\Desktop\myfile";
+		filePath = Application.dataPath + "/myfile.wav";
+		//filePath = @"C:\Users\Richard\Desktop\lights.wav";
+
+		aud = GetComponent<AudioSource>();
+		foreach (string device in Microphone.devices) {
+			print ("Name: " + device);
+		}
+		aud = GetComponent<AudioSource>();
 	}
 
-	public void Both(){
-
+	void Update () {
+		if(Input.GetKeyDown("r")){
+			aud.clip = Microphone.Start(null, false, 4, 16000);
+		}
+		
+		if(Input.GetKeyUp("r")){
+			Microphone.End(null);
+			SavWav.Save("myfile", aud.clip);
+			VogSpeechTranslate();
+		}
 	}
 
-	public void Dictate()
-	{
-		string response = vogRecognize(filePath);
-		Debug.Log(response);
+	public void VogSpeechTranslate(){
+		string command = vogDictation(filePath);
+		string transtext = vogTransText(command);
+		print(transtext);
+
+		if (transtext.Contains("successfully turned off the light")) {
+			GameObject.FindGameObjectWithTag("IndoorLight").light.enabled = false;
+		}
+
+		if (transtext.Contains("successfully turned on the light")) {
+			GameObject.FindGameObjectWithTag("IndoorLight").light.enabled = true;
+		}
 	}
 
-    public void TransText()
-    {
-        string response = vogTransText("Turn off the lights");
-        Debug.Log(response);
-    }
-	
 	public string vogTransText(string sentence)
 	{
 		// Strip any special characters from the translated message
@@ -113,25 +144,28 @@ public class Vognition : MonoBehaviour
 		return retVal;
 	}
 
-	public string vogRecognize(string filePath)
+	public string vogDictation (string filePath)
 	{
 		string appId = "NMDPTRIAL_le_richard206520141105025111";
 		string appKey = "db3253ad1bdd222d25517ef496be850cf7c8d74044b6d750c09b7f4963f7593e2aaceb458a0e72af5ff0a3f5ae2802a6f0d9e6348fbd854f580499bcfcf2fa26";
 		string id = "0000";
 		string nuanceURL = "https://dictation.nuancemobility.net:443/NMDPAsrCmdServlet/dictation?appId=" + appId + "&appKey=" + appKey + "&id=" + id;
 		string translatedMessage = "null";
-		try
-		{
+		//try
+		//{
+			System.Net.ServicePointManager.CertificatePolicy = new TrustAllCertificatePolicy();
 			HttpWebRequest nuanceRequest = (HttpWebRequest)WebRequest.Create(nuanceURL);           
 			nuanceRequest.ProtocolVersion = HttpVersion.Version11;
 			nuanceRequest.ContentType = "audio/x-wav;codec=pcm;bit=16;rate=16000";
 			nuanceRequest.Accept = "text/plain";
 			nuanceRequest.Method = WebRequestMethods.Http.Post;
+			nuanceRequest.AuthenticationLevel = AuthenticationLevel.None;
 			nuanceRequest.Credentials = System.Net.CredentialCache.DefaultCredentials;
 			
 			nuanceRequest.Headers["Accept-Language"] = "enus";
 			nuanceRequest.Headers["Accept-Topic"] = "Dictation";
 			nuanceRequest.Headers["X-Dictation-NBestListSize"] = "1";
+			
 			
 			// Store the post data into the MemoryStream
 			MemoryStream postDataStream = new MemoryStream();
@@ -161,14 +195,13 @@ public class Vognition : MonoBehaviour
 			// Get the response from the server
 			StreamReader responseReader = new StreamReader(nuanceRequest.GetResponse().GetResponseStream());
 			translatedMessage = responseReader.ReadToEnd();
-		}
-		catch (WebException e)
+		//}
+		/*catch (WebException e)
 		{
-
 			// Thrown if a 200 is not returned
-			//print("Response code: " + (int)((HttpWebResponse)e.Response).StatusCode +
-			//                  "\t" + ((HttpWebResponse)e.Response).StatusDescription);
-			//throw new WebException();
+			print("Response code: " + (int)((HttpWebResponse)e.Response).StatusCode +
+			                  "\t" + ((HttpWebResponse)e.Response).StatusDescription);
+			throw new WebException();
 
 			Debug.Log(e.StackTrace);
 		}
@@ -176,7 +209,7 @@ public class Vognition : MonoBehaviour
 		{
 			Console.WriteLine(file.Message);
 			throw new FileNotFoundException();
-		}
+		}*/
 		return translatedMessage;
 	}
 }
