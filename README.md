@@ -27,5 +27,8 @@ Vognition is a platform as a service that provides natural language voice contro
 3. Set "Recording Key" in Inspector
   * Click on the "VognitionObject" in the Hierarchy Section in the Unity Editor
   * In the Inspector window, set the "Recording Key" (Default is "R")
-3. During testing, Hold the "Recording Key" or "R" and say your command
+3. Microphone Setup
+  * The recording device used by the "VognitionObject" is whatever is set as default in your operating system
+  * The available microphone devices show up in the "Console" window in the Unity Editor
+4. During testing, Hold the "Recording Key" or "R" and say your command
   * Example in Test Scene: Say "Turn off the lights", the lights in the Test Scene should turn off
