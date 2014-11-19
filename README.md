@@ -8,8 +8,12 @@ Vognition is a platform as a service that provides natural language voice contro
 ## What is included in this project?
 
 * Vognition package containing Vognition assets/scripts 
-* Example project with Test Scene
-* C# Scripts with Vognition functions
+* Example Project with Test Scene
+
+## What is included in the Vognition package?
+* Vognition Object Prefab for Game Scene
+* C# Script with Vognition functions
+* C# Script with Unity Microphone/Input functions
 
 ## Getting Started
 
