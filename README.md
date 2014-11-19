@@ -17,6 +17,15 @@ Vognition is a platform as a service that provides natural language voice contro
 
 ## Getting Started
 
-1. Import Vognition package into your Unity Project.
-2. Add Vognition prefab into your scene.
-3. During testing, Hold "R" and say your command (Recording key can be set in Inspector. "R" is default.)
+1. Import Vognition package into your Unity Project
+  * Double click the Vognition.unitypackage file
+  * The Unity Editor window will open, click "Import"
+  * The Assets and Scripts are now in you project
+2. Add Vognition prefab into your scene
+  * In the "Prefab" folder is an object called "VognitionObject"
+  * Drag the "VognitionObject" in the Hierarchy Section in the Unity Editor
+3. Set "Recording Key" in Inspector
+  * Click on the "VognitionObject" in the Hierarchy Section in the Unity Editor
+  * In the Inspector window, set the "Recording Key" (Default is "R")
+3. During testing, Hold the "Recording Key" or "R" and say your command
+  * Example in Test Scene: Say "Turn off the lights", the lights in the Test Scene should turn off
