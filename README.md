@@ -22,8 +22,8 @@ Vognition is a platform as a service that provides natural language voice contro
   * The Unity Editor window will open, click "Import"
   * The Assets and Scripts are now in your project
 2. Add Vognition prefab into your scene
-  * In the "Prefab" folder is an object called "VognitionObject"
-  * Drag the "VognitionObject" in the Hierarchy Section in the Unity Editor
+  * In the "Prefab" folder there is an object called "VognitionObject"
+  * Drag the "VognitionObject" into the Hierarchy Section in the Unity Editor
 3. Set "Recording Key" in Inspector
   * Click on the "VognitionObject" in the Hierarchy Section in the Unity Editor
   * In the Inspector window, set the "Recording Key" (Default is "R")
