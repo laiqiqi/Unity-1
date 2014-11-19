@@ -1,13 +1,15 @@
 Vognition Project for Unity - Game Engine
 =========================================
 
-##What is Vognition?
+## What is Vognition?
 
 Vognition is a platform as a service that provides natural language voice control APIs for smart devices that developers without speech expertise can use to create compelling voice-enabled applications.
 
-##What can I do with this Unity project?
+## What is included in this project?
 
-After importing the Vognition package, you can add a Vognition prefab object to your Scene. If the prefab is included in the scene, you can send a speech command to Vognition to get translated and then perform an action in the scene based on your command.
+* Vognition package containing Vognition assets/scripts 
+* Example project with Test Scene
+* C# Scripts with Vognition functions
 
 ## Getting Started
 
