@@ -20,7 +20,7 @@ Vognition is a platform as a service that provides natural language voice contro
 1. Import Vognition package into your Unity Project
   * Double click the Vognition.unitypackage file
   * The Unity Editor window will open, click "Import"
-  * The Assets and Scripts are now in you project
+  * The Assets and Scripts are now in your project
 2. Add Vognition prefab into your scene
   * In the "Prefab" folder is an object called "VognitionObject"
   * Drag the "VognitionObject" in the Hierarchy Section in the Unity Editor
