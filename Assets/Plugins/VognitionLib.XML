@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VognitionLib</name>
+    </assembly>
+    <members>
+        <member name="T:Vognition">
+            <summary>
+            Client  class to access Vognitions voice recognition services
+            </summary>
+        </member>
+        <member name="M:Vognition.getRole">
+            <summary>
+            Used in assignRole(), gets the current role to be assigned
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.setRole(Vognition.Roles)">
+            <summary>
+            Allows user to set a different role than 'Friend' in assignRole()
+            </summary>
+            <param name="newRole"></param>
+        </member>
+        <member name="M:Vognition.DoConfigure(System.String,System.Int32,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function calls the initial sets functions for all the global private variables
+            </summary>    
+        </member>
+        <member name="M:Vognition.SetHostname(System.String)">
+            <summary>
+            This function is used to assign the Hostname variable
+            </summary>
+            <param name="hostname"></param>
+        </member>
+        <member name="M:Vognition.SetPortnumber(System.Int32)">
+            <summary>
+            This function is used to assign the Portnumber variable
+            </summary>
+            <param name="portnumber"></param>
+        </member>
+        <member name="M:Vognition.SetAppKey(System.String)">
+            <summary>
+            This function is used to assign the Appkey variable
+            </summary>
+            <param name="appkey"></param>
+        </member>
+        <member name="M:Vognition.SetAppSecret(System.String)">
+            <summary>
+            This function is used to assign the Appsecret variable
+            </summary>
+            <param name="appsecret"></param>
+        </member>
+        <member name="M:Vognition.SetConsumerKey(System.String)">
+            <summary>
+            This function is used to assign the Conkey variable
+            </summary>
+            <param name="conkey"></param>
+        </member>
+        <member name="M:Vognition.SetConsumerSecret(System.String)">
+            <summary>
+            This function is used to assign the Consecret variable
+            </summary>
+            <param name="consecret"></param>
+        </member>
+        <member name="M:Vognition.regSetConKey(System.String)">
+            <summary>
+            This function is used to assign the regConkey variable obtained 
+            when registering a new user
+            </summary>
+            <param name="regConkey"></param>
+        </member>
+        <member name="M:Vognition.setHPDL_ID(System.String)">
+            <summary>
+            This function is used to set the HPDL_ID variable
+            </summary>
+            <param name="HPDL_ID"></param>
+        </member>
+        <member name="M:Vognition.getHPDL_ID">
+            <summary>
+            This function is used to get the HPDL_ID variable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.GetAppKey">
+            <summary>
+            This function is used to get the Appkey variable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.GetAppSecret">
+            <summary>
+            This function is used to get the Appsecret variable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.GetConsumerKey">
+            <summary>
+            This function is used to get the Conkey variable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.GetConsumerSecret">
+            <summary>
+            This function is used to get the Consecret variable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.regGetConKey">
+            <summary>
+            This function is used to get the regConKey variable, set in registerUser()
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.GetHostname">
+            <summary>
+            This function is used to get the Hostname variable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.GetPortnumber">
+            <summary>
+            This function is used to get the Portnumber variable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.transText(System.String)">
+            <summary>
+            This API submits a textual sentence to be translated to a machine actionable command 
+            assembled in Vognition. It is submitted to the API via an HTTP POST
+            </summary>
+            <param name="sentence"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.dictation(System.String)">
+            <summary>
+            This API submits a voice file to be analyzed by the Vognition service using the iSpeech ASR. It
+            is submitted to the API via an HTTP POST
+            </summary>
+            <param name="filePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.createUser">
+            <summary>
+            Registers a user associated to the application ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.createHomeProfileID">
+            <summary>
+            Creates a home profile ID
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.uploadHomeProfile">
+            <summary>
+            Creates a home profile XML that defines the existence 
+            of devices and service to utilize
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.removeHomeProfile">
+            <summary>
+            Removes a home profile from all users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.assignRole">
+            <summary>
+            Creates a role to associate a different user to the homeprofile of the owner
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.changeRole">
+            <summary>
+            Owner of the home profile can change the privileges of the user
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.deleteRole">
+            <summary>
+            
+            </summary>
+            <param name="regConKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.acceptRole">
+            <summary>
+            User accepts a role access to another home profile
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.unassignRole">
+            <summary>
+            User removes themselves from a role access to another home profile
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Vognition.Roles">
+            <summary>
+            Vognition supports 4 types of roles: Owner, Family, Relative, Friend, Service Provider
+            </summary>
+        </member>
+        <member name="T:Vognition.SSLValidator">
+            <summary>
+            Inner class called to handle HttpWebRequest certification
+            </summary>
+        </member>
+    </members>
+</doc>
