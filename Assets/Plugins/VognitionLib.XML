@@ -9,6 +9,41 @@
             Client  class to access Vognitions voice recognition services
             </summary>
         </member>
+        <member name="F:Vognition.Appkey">
+            <summary>
+            This is provided after registering with Vognition
+            </summary>
+        </member>
+        <member name="F:Vognition.Appsecret">
+            <summary>
+            This is provided after registering with Vognition
+            </summary>
+        </member>
+        <member name="F:Vognition.Conkey">
+            <summary>
+            This is provided after registering with Vognition
+            </summary>
+        </member>
+        <member name="F:Vognition.Consecret">
+            <summary>
+            This is provided after registering with Vognition
+            </summary>
+        </member>
+        <member name="F:Vognition.NuanceAppID">
+            <summary>
+            This is the App ID provided by Nuance
+            </summary>
+        </member>
+        <member name="F:Vognition.NuanceAppKey">
+            <summary>
+            This is the 128 byte App key provided by Nuance
+            </summary>
+        </member>
+        <member name="F:Vognition.NuanceID">
+            <summary>
+            This is the device ID, default value is 0000
+            </summary>
+        </member>
         <member name="M:Vognition.getRole">
             <summary>
             Used in assignRole(), gets the current role to be assigned
@@ -75,6 +110,24 @@
             </summary>
             <param name="HPDL_ID"></param>
         </member>
+        <member name="M:Vognition.setNuanceAppID(System.String)">
+            <summary>
+            Sets Nuance app id
+            </summary>
+            <param name="NuanceAppID"></param>
+        </member>
+        <member name="M:Vognition.setNuanceAppKey(System.String)">
+            <summary>
+            Sets the Nuance app key
+            </summary>
+            <param name="NuanceAppKey"></param>
+        </member>
+        <member name="M:Vognition.setNuanceID(System.String)">
+            <summary>
+            Sets the Nuance Id
+            </summary>
+            <param name="NuanceID"></param>
+        </member>
         <member name="M:Vognition.getHPDL_ID">
             <summary>
             This function is used to get the HPDL_ID variable
@@ -120,6 +173,24 @@
         <member name="M:Vognition.GetPortnumber">
             <summary>
             This function is used to get the Portnumber variable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.getNuanceAppID">
+            <summary>
+            Returns the currently set Nuance app id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.getNuanceAppKey">
+            <summary>
+            Gets the currently set Nuance app key
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Vognition.getNuanceID">
+            <summary>
+            Gets the currently set Nuance ID
             </summary>
             <returns></returns>
         </member>

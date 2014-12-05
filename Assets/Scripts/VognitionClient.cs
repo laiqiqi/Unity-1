@@ -30,9 +30,12 @@ public class VognitionClient : MonoBehaviour
 	}
 
 	public void VogSpeechTranslate(){
-		string command = client.vogDictation(filePath);
+		// Don't forget to visit Nuance.com to get your appId and app Key! 
+		client.setNuanceAppID("");
+		client.setNuanceAppKey("");
+		string command = client.dictation(filePath);
 		print (command);
-		string transtext = client.vogTransText(command);
+		string transtext = client.transText(command);
 		print(transtext);
 
 		// Parse the response from transtext, extract the "ttsResponse" only if it is valid json
@@ -42,8 +45,8 @@ public class VognitionClient : MonoBehaviour
 			ttsResponse = Json["ttsResponse"].Value;
 			print(ttsResponse);
 		}
-
-		switch (ttsResponse)
+		Debug.Log (command);
+		switch(ttsResponse)
 		{
 			case "successfully turned off the light":
 				GameObject.FindGameObjectWithTag ("IndoorLight").light.enabled = false;
