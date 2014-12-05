@@ -30,9 +30,8 @@ public class VognitionClient : MonoBehaviour
 	}
 
 	public void VogSpeechTranslate(){
-		// Don't forget to visit Nuance.com to get your appId and app Key! 
-		client.setNuanceAppID("");
-		client.setNuanceAppKey("");
+		client.setNuanceAppID("Your app id here");
+		client.setNuanceAppKey("Your app key here");
 		string command = client.dictation(filePath);
 		print (command);
 		string transtext = client.transText(command);
