@@ -5,6 +5,7 @@ public class VognitionClient : MonoBehaviour
 {
 	string filePath;
 	AudioSource aud;
+	public KeyCode recordingKey = KeyCode.R;
 	Vognition client = new Vognition();
 
 	public void Start()
@@ -18,11 +19,11 @@ public class VognitionClient : MonoBehaviour
 	}
 
 	void Update () {
-		if(Input.GetKeyDown("r")){
+		if(Input.GetKeyDown(recordingKey)){
 			aud.clip = Microphone.Start(null, false, 4, 16000);
 		}
 		
-		if(Input.GetKeyUp("r")){
+		if(Input.GetKeyUp(recordingKey)){
 			Microphone.End(null);
 			SavWav.Save("myfile", aud.clip);
 			VogSpeechTranslate();
